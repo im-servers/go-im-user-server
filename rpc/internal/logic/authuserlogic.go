@@ -4,7 +4,8 @@ import (
 	"context"
 
 	"go-im-user-server/rpc/internal/svc"
-	"go-im-user-server/rpc/types/user"
+
+	"github.com/heyehang/go-im-grpc/user_server"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +24,8 @@ func NewAuthUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AuthUser
 	}
 }
 
-func (l *AuthUserLogic) AuthUser(in *user.AuthUserReq) (*user.AuthUserReply, error) {
+func (l *AuthUserLogic) AuthUser(in *user_server.AuthUserReq) (*user_server.AuthUserReply, error) {
 	// todo: add your logic here and delete this line
 
-	return &user.AuthUserReply{}, nil
+	return &user_server.AuthUserReply{}, nil
 }

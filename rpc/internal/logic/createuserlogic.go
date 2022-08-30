@@ -4,7 +4,8 @@ import (
 	"context"
 
 	"go-im-user-server/rpc/internal/svc"
-	"go-im-user-server/rpc/types/user"
+
+	"github.com/heyehang/go-im-grpc/user_server"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +24,8 @@ func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 	}
 }
 
-func (l *CreateUserLogic) CreateUser(in *user.CreateUserReq) (*user.CreateUserReply, error) {
+func (l *CreateUserLogic) CreateUser(in *user_server.CreateUserReq) (*user_server.CreateUserReply, error) {
 	// todo: add your logic here and delete this line
 
-	return &user.CreateUserReply{}, nil
+	return &user_server.CreateUserReply{}, nil
 }

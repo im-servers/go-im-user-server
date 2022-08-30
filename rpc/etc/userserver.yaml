@@ -1,9 +1,9 @@
-Name: user.rpc
+Name: userserver.rpc
 ListenOn: 127.0.0.1:8080
 Etcd:
   Hosts:
   - 127.0.0.1:2379
-  Key: user.rpc
+  Key: userserver.rpc
 # mysql 配置
 DataSource: root:123456@tcp(localhost:3306)/go_im_server
 # 对应的表

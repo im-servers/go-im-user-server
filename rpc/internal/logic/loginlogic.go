@@ -4,7 +4,8 @@ import (
 	"context"
 
 	"go-im-user-server/rpc/internal/svc"
-	"go-im-user-server/rpc/types/user"
+
+	"github.com/heyehang/go-im-grpc/user_server"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -23,8 +24,8 @@ func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic 
 	}
 }
 
-func (l *LoginLogic) Login(in *user.LoginReq) (*user.LoginReply, error) {
+func (l *LoginLogic) Login(in *user_server.LoginReq) (*user_server.LoginReply, error) {
 	// todo: add your logic here and delete this line
 
-	return &user.LoginReply{}, nil
+	return &user_server.LoginReply{}, nil
 }
