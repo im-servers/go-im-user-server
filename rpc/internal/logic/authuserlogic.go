@@ -2,18 +2,23 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"go-im-user-server/rpc/internal/svc"
 
 	"github.com/heyehang/go-im-grpc/user_server"
+	"github.com/pkg/errors"
 
 	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/stores/redis"
 )
 
 type AuthUserLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
+
+	store *redis.Redis
 }
 
 func NewAuthUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AuthUserLogic {
@@ -21,11 +26,23 @@ func NewAuthUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *AuthUser
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
+		store:  redis.New(svcCtx.Config.CacheRedis[0].Host),
 	}
 }
 
 func (l *AuthUserLogic) AuthUser(in *user_server.AuthUserReq) (*user_server.AuthUserReply, error) {
-	// todo: add your logic here and delete this line
+	_, err := l.svcCtx.UserModel.FindOne(l.ctx, in.Id)
+	if err != nil {
+		err = errors.WithMessage(err, "FindOne err")
+		l.Logger.Error(err)
+		return &user_server.AuthUserReply{}, err
+	}
+	_, err = l.store.SaddCtx(l.ctx, fmt.Sprintf("%s%v", cacheGoImServerUserDeviceTokenPrefix, in.Id), in.DeviceToken)
 
-	return &user_server.AuthUserReply{}, nil
+	if err != nil {
+		err = errors.WithMessage(err, "FindOne set cache err")
+		l.Logger.Error(err)
+		return &user_server.AuthUserReply{}, err
+	}
+	return &user_server.AuthUserReply{AccessToken: in.AccessToken, DeviceToken: in.DeviceToken}, nil
 }

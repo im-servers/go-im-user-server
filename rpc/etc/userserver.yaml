@@ -5,9 +5,10 @@ Etcd:
   - 127.0.0.1:2379
   Key: userserver.rpc
 # mysql 配置
-DataSource: root:123456@tcp(localhost:3306)/go_im_server
-# 对应的表
-Table: user
+Mysql:
+  DataSource: root:123456@tcp(localhost:3306)/go_im_server
+  # 对应的表
+  Table: user
 # redis 作为换存储
-Cache:
+CacheRedis:
   - Host: localhost:6379

@@ -3,10 +3,12 @@ module go-im-user-server/rpc
 go 1.19
 
 require (
-	github.com/heyehang/go-im-grpc v0.0.0-20220830080450-1ef597317774
+	github.com/heyehang/go-im-grpc v0.0.0-20220830084658-6b45bb7fddf9
 	github.com/zeromicro/go-zero v1.4.0
 	google.golang.org/grpc v1.49.0
 )
+
+require github.com/google/uuid v1.3.0 // indirect
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -26,6 +28,7 @@ require (
 	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/googleapis/gnostic v0.5.5 // indirect
+	github.com/heyehang/go-im-pkg v0.0.0-20220828033218-8f7f004767a3
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/mattn/go-colorable v0.1.9 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
@@ -34,6 +37,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/openzipkin/zipkin-go v0.4.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.2 // indirect
+	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.12.2 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.32.1 // indirect
