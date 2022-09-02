@@ -40,7 +40,7 @@ func (l *AuthUserLogic) AuthUser(in *user_server.AuthUserReq) (*user_server.Auth
 	_, err = l.store.SaddCtx(l.ctx, fmt.Sprintf("%s%v", cacheGoImServerUserDeviceTokenPrefix, in.Id), in.DeviceToken)
 
 	if err != nil {
-		err = errors.WithMessage(err, "FindOne set cache err")
+		err = errors.WithMessage(err, "set cache err")
 		l.Logger.Error(err)
 		return &user_server.AuthUserReply{}, err
 	}

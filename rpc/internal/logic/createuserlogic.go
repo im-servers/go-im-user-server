@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"crypto/md5"
+	"fmt"
 
 	"go-im-user-server/rpc/internal/svc"
 	"go-im-user-server/rpc/model"
@@ -13,12 +14,15 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/core/stores/redis"
 )
 
 type CreateUserLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 	logx.Logger
+
+	store *redis.Redis
 }
 
 func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *CreateUserLogic {
@@ -26,6 +30,8 @@ func NewCreateUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Create
 		ctx:    ctx,
 		svcCtx: svcCtx,
 		Logger: logx.WithContext(ctx),
+
+		store: redis.New(svcCtx.Config.CacheRedis[0].Host),
 	}
 }
 
@@ -77,6 +83,14 @@ func (l *CreateUserLogic) CreateUser(in *user_server.CreateUserReq) (*user_serve
 		AccessToken:  trand.RandNString(trand.RandSourceLetterAndNumber, 32),
 		AccessExpire: 0,
 		RefreshAfter: 0,
+	}
+
+	_, err = l.store.SaddCtx(l.ctx, fmt.Sprintf("%s%v", cacheGoImServerUserTokenPrefix, id), token.AccessToken)
+
+	if err != nil {
+		err = errors.WithMessage(err, "set cache err")
+		l.Logger.Error(err)
+		return &user_server.CreateUserReply{}, err
 	}
 
 	return &user_server.CreateUserReply{Token: token, Id: id}, nil
