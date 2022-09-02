@@ -19,18 +19,20 @@ type (
 	CreateUserReq                = user_server.CreateUserReq
 	GetDeviceTokensByUserIDReply = user_server.GetDeviceTokensByUserIDReply
 	GetDeviceTokensByUserIDReq   = user_server.GetDeviceTokensByUserIDReq
-	IdReq                        = user_server.IdReq
+	GetUsersByTokensReply        = user_server.GetUsersByTokensReply
+	GetUsersByTokensReq          = user_server.GetUsersByTokensReq
+	GetUsersReply                = user_server.GetUsersReply
+	GetUsersReq                  = user_server.GetUsersReq
 	IdsReq                       = user_server.IdsReq
 	ListDeviceToken              = user_server.ListDeviceToken
 	LoginReply                   = user_server.LoginReply
 	LoginReq                     = user_server.LoginReq
 	Token                        = user_server.Token
-	UserInfoReply                = user_server.UserInfoReply
-	UserInfosReply               = user_server.UserInfosReply
+	User                         = user_server.User
 
-	User interface {
-		GetUser(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*UserInfoReply, error)
-		GetUsers(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*UserInfoReply, error)
+	UserSrv interface {
+		GetUsers(ctx context.Context, in *GetUsersReq, opts ...grpc.CallOption) (*GetUsersReply, error)
+		GetUsersByTokens(ctx context.Context, in *GetUsersByTokensReq, opts ...grpc.CallOption) (*GetUsersByTokensReply, error)
 		CreateUser(ctx context.Context, in *CreateUserReq, opts ...grpc.CallOption) (*CreateUserReply, error)
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginReply, error)
 		AuthUser(ctx context.Context, in *AuthUserReq, opts ...grpc.CallOption) (*AuthUserReply, error)
@@ -42,20 +44,20 @@ type (
 	}
 )
 
-func NewUser(cli zrpc.Client) User {
+func NewUser(cli zrpc.Client) UserSrv {
 	return &defaultUser{
 		cli: cli,
 	}
 }
 
-func (m *defaultUser) GetUser(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*UserInfoReply, error) {
-	client := user_server.NewUserClient(m.cli.Conn())
-	return client.GetUser(ctx, in, opts...)
-}
-
-func (m *defaultUser) GetUsers(ctx context.Context, in *IdReq, opts ...grpc.CallOption) (*UserInfoReply, error) {
+func (m *defaultUser) GetUsers(ctx context.Context, in *GetUsersReq, opts ...grpc.CallOption) (*GetUsersReply, error) {
 	client := user_server.NewUserClient(m.cli.Conn())
 	return client.GetUsers(ctx, in, opts...)
+}
+
+func (m *defaultUser) GetUsersByTokens(ctx context.Context, in *GetUsersByTokensReq, opts ...grpc.CallOption) (*GetUsersByTokensReply, error) {
+	client := user_server.NewUserClient(m.cli.Conn())
+	return client.GetUsersByTokens(ctx, in, opts...)
 }
 
 func (m *defaultUser) CreateUser(ctx context.Context, in *CreateUserReq, opts ...grpc.CallOption) (*CreateUserReply, error) {
