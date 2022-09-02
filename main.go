@@ -32,6 +32,7 @@ func main() {
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		user_server.RegisterUserServer(grpcServer, server.NewUserServer(ctx))
+		//tttodo http auth
 		//	if c.Mode == service.DevMode || c.Mode == service.TestMode {
 		reflection.Register(grpcServer)
 		//	}
