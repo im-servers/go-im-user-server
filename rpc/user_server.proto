@@ -4,11 +4,15 @@ package user_server;
 
 option go_package = "./user_server";
 
-message IdReq{
-  int64 id = 1;
+message GetUsersReq{
+ repeated int64 id = 1;
 }
 
-message UserInfoReply{
+message   GetUsersReply {
+  repeated User users = 1;
+}
+
+message User {
   int64 id = 1;
   string name = 2;
   string number = 3;
@@ -21,10 +25,6 @@ message IdsReq{
   repeated int64 ids = 1;
 }
 
-message UserInfosReply{
-  map<int64,UserInfoReply> userMap =1;
-}
-
 
 message CreateUserReq{
   string name = 1;
@@ -33,6 +33,7 @@ message CreateUserReq{
   string phone = 4;
   int64  age = 5;
   string password = 6;
+  string deviceID = 7;
 }
 
 
@@ -45,6 +46,7 @@ message CreateUserReply{
 message loginReq{
   string phone = 1;
   string password = 2;
+  string deviceID = 3;
 }
 
 
@@ -85,9 +87,18 @@ message ListDeviceToken {
 }
 
 
+message GetUsersByTokensReq {
+  repeated string tokens = 1;
+}
+
+message GetUsersByTokensReply {
+  repeated User users = 1;
+}
+
+
 service user {
-  rpc getUser(IdReq) returns(UserInfoReply);
-  rpc getUsers(IdReq) returns(UserInfoReply);
+  rpc getUsers(GetUsersReq) returns(GetUsersReply);
+  rpc getUsersByTokens (GetUsersByTokensReq) returns (GetUsersByTokensReply);
   rpc createUser(CreateUserReq) returns(CreateUserReply);
   rpc login(loginReq) returns(loginReply);
   rpc authUser(authUserReq) returns(authUserReply);

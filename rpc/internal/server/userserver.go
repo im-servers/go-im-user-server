@@ -6,9 +6,9 @@ package server
 import (
 	"context"
 
+	"github.com/heyehang/go-im-grpc/user_server"
 	"go-im-user-server/rpc/internal/logic"
 	"go-im-user-server/rpc/internal/svc"
-	"github.com/heyehang/go-im-grpc/user_server"
 )
 
 type UserServer struct {
@@ -22,14 +22,14 @@ func NewUserServer(svcCtx *svc.ServiceContext) *UserServer {
 	}
 }
 
-func (s *UserServer) GetUser(ctx context.Context, in *user_server.IdReq) (*user_server.UserInfoReply, error) {
-	l := logic.NewGetUserLogic(ctx, s.svcCtx)
-	return l.GetUser(in)
-}
-
-func (s *UserServer) GetUsers(ctx context.Context, in *user_server.IdReq) (*user_server.UserInfoReply, error) {
+func (s *UserServer) GetUsers(ctx context.Context, in *user_server.GetUsersReq) (*user_server.GetUsersReply, error) {
 	l := logic.NewGetUsersLogic(ctx, s.svcCtx)
 	return l.GetUsers(in)
+}
+
+func (s *UserServer) GetUsersByTokens(ctx context.Context, in *user_server.GetUsersByTokensReq) (*user_server.GetUsersByTokensReply, error) {
+	l := logic.NewGetUsersByTokensLogic(ctx, s.svcCtx)
+	return l.GetUsersByTokens(in)
 }
 
 func (s *UserServer) CreateUser(ctx context.Context, in *user_server.CreateUserReq) (*user_server.CreateUserReply, error) {

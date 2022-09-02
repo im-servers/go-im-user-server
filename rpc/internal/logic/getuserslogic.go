@@ -24,8 +24,8 @@ func NewGetUsersLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUsers
 	}
 }
 
-func (l *GetUsersLogic) GetUsers(in *user_server.IdReq) (*user_server.UserInfoReply, error) {
+func (l *GetUsersLogic) GetUsers(in *user_server.GetUsersReq) (*user_server.GetUsersReply, error) {
 	// todo: add your logic here and delete this line
 
-	return &user_server.UserInfoReply{}, nil
+	return &user_server.GetUsersReply{}, nil
 }

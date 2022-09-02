@@ -3,7 +3,7 @@ module go-im-user-server/rpc
 go 1.19
 
 require (
-	github.com/heyehang/go-im-grpc v0.0.0-20220830084658-6b45bb7fddf9
+	github.com/heyehang/go-im-grpc v0.0.0-20220902120219-7c8710e4ae52
 	github.com/zeromicro/go-zero v1.4.0
 	google.golang.org/grpc v1.49.0
 )
