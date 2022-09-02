@@ -1,0 +1,20 @@
+Name: user-gateway
+Host: 0.0.0.0
+Port: 9500
+Upstreams:
+  - Grpc:
+      Etcd:
+        Hosts:
+          - 127.0.0.1:2379
+        Key: userserver.rpc
+    # protoset mode
+    ProtoSets:
+      - user_server.pb
+    # Mappings can also be written in proto options
+    Mappings:
+      - Method: post
+        Path: /user/login
+        RpcPath: user_server.user/login
+  - Grpc:
+      Endpoints:
+        - 127.0.0.1:8082

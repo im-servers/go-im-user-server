@@ -8,7 +8,12 @@ require (
 	google.golang.org/grpc v1.49.0
 )
 
-require github.com/google/uuid v1.3.0 // indirect
+require (
+	github.com/fullstorydev/grpcurl v1.8.6 // indirect
+	github.com/golang-jwt/jwt/v4 v4.4.2 // indirect
+	github.com/google/uuid v1.3.0 // indirect
+	github.com/jhump/protoreflect v1.12.0 // indirect
+)
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
