@@ -19,7 +19,7 @@ import (
 )
 
 var configFile = flag.String("f", "etc/userserver.yaml", "the config file")
-var getewayconfigFile = flag.String("geteway", "etc/geteway.yaml", "the config file")
+var gatewayconfigFile = flag.String("geteway", "etc/gateway.yaml", "the config file")
 
 func main() {
 	flag.Parse()
@@ -50,7 +50,7 @@ func main() {
 	wg.Add(1)
 
 	var getewayConf gateway.GatewayConf
-	conf.MustLoad(*getewayconfigFile, &getewayConf)
+	conf.MustLoad(*gatewayconfigFile, &getewayConf)
 	gw := gateway.MustNewServer(getewayConf)
 
 	go func() {
