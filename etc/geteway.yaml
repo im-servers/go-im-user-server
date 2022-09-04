@@ -15,6 +15,9 @@ Upstreams:
       - Method: post
         Path: /user/login
         RpcPath: user_server.user/login
+      - Method: post
+        Path: /user/create
+        RpcPath: user_server.user/createUser
   - Grpc:
       Endpoints:
         - 127.0.0.1:8082
