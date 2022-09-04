@@ -5,7 +5,7 @@ Upstreams:
   - Grpc:
       Etcd:
         Hosts:
-          - 127.0.0.1:2379
+          - etcd.goimsrv.cn:2379
         Key: userserver.rpc
     # protoset mode
     ProtoSets:

@@ -2,13 +2,13 @@ Name: userserver.rpc
 ListenOn: 0.0.0.0:8082
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+  - etcd.goimsrv.cn:2379
   Key: userserver.rpc
 # mysql 配置
 Mysql:
-  DataSource: root:12345678@tcp(localhost:3306)/go_im_server
+  DataSource: root:123456@tcp(mysql.goimsrv.cn:3306)/go_im_server
   # 对应的表
   Table: user
 # redis 作为换存储
 CacheRedis:
-  - Host: localhost:6379
+  - Host: redis.goimsrv.cn:6379
