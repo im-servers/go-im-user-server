@@ -4,7 +4,9 @@ go 1.19
 
 require (
 	github.com/heyehang/go-im-grpc v0.0.0-20220902120219-7c8710e4ae52
+	github.com/rs/zerolog v1.28.0
 	github.com/zeromicro/go-zero v1.4.0
+	github.com/zeromicro/zero-contrib/logx/zerologx v0.0.0-20220829044935-85e666996f88
 	google.golang.org/grpc v1.49.0
 )
 
@@ -19,7 +21,7 @@ require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
 	github.com/coreos/go-semver v0.3.0 // indirect
-	github.com/coreos/go-systemd/v22 v22.3.2 // indirect
+	github.com/coreos/go-systemd/v22 v22.3.3-0.20220203105225-a9a7ef127534 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/fatih/color v1.13.0 // indirect
@@ -35,7 +37,7 @@ require (
 	github.com/googleapis/gnostic v0.5.5 // indirect
 	github.com/heyehang/go-im-pkg v0.0.0-20220828033218-8f7f004767a3
 	github.com/json-iterator/go v1.1.12 // indirect
-	github.com/mattn/go-colorable v0.1.9 // indirect
+	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect

@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
 	"sync"
 	"time"
 
@@ -11,9 +12,12 @@ import (
 	"go-im-user-server/rpc/internal/svc"
 
 	"github.com/heyehang/go-im-grpc/user_server"
+	"github.com/rs/zerolog"
 	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/gateway"
 	"github.com/zeromicro/go-zero/zrpc"
+	"github.com/zeromicro/zero-contrib/logx/zerologx"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -26,8 +30,12 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
-	ctx := svc.NewServiceContext(c)
 
+	logger := zerolog.New(os.Stderr).With().Timestamp().Logger()
+	writer := zerologx.NewZeroLogWriter(logger)
+	logx.SetWriter(writer)
+
+	ctx := svc.NewServiceContext(c)
 	wg := new(sync.WaitGroup)
 
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
