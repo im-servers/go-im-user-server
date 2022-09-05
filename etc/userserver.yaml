@@ -12,3 +12,7 @@ Mysql:
 # redis 作为换存储
 CacheRedis:
   - Host: redis.goimsrv.cn:6379
+
+Log:
+ Mode : volume
+ ServiceName : userserver
