@@ -9,7 +9,7 @@ WORKDIR /build
 ADD go.mod .
 ADD go.sum .
 RUN go mod download
-
+COPY . .
 COPY ./etc /app/etc
 COPY ./user_server.pb /app/user_server.pb
 RUN go build -ldflags="-s -w" -o /app/main main.go
