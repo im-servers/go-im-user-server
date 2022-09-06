@@ -4,6 +4,8 @@ Etcd:
   Hosts:
   - etcd.goimsrv.cn:2379
   Key: userserver.rpc
+  User: root   
+  Pass: im-server-256/?
 # mysql 配置
 Mysql:
   DataSource: root:123456@tcp(mysql.goimsrv.cn:3306)/go_im_server
