@@ -13,8 +13,9 @@ Mysql:
   Table: user
 # redis 作为换存储
 CacheRedis:
-  - Host: redis.goimsrv.cn:6379
+  - Host: redis.goimsrv.cn:7001
     Pass: im-server-256/?
+    Type: cluster
 
 Log:
  Mode : volume
