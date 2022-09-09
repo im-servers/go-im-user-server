@@ -7,6 +7,10 @@ import (
 	"sync"
 	"time"
 
+	"go-im-user-server/internal/config"
+	"go-im-user-server/internal/server"
+	"go-im-user-server/internal/svc"
+
 	"github.com/heyehang/go-im-grpc/user_server"
 	"github.com/heyehang/go-im-pkg/tlog"
 	"github.com/pyroscope-io/client/pyroscope"
@@ -14,16 +18,13 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/gateway"
 	"github.com/zeromicro/go-zero/zrpc"
-	"go-im-user-server/rpc/internal/config"
-	"go-im-user-server/rpc/internal/server"
-	"go-im-user-server/rpc/internal/svc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
 var profile *pyroscope.Profiler
 var configFile = flag.String("f", "etc/userserver.yaml", "the config file")
-var gatewayconfigFile = flag.String("geteway", "etc/gateway.yaml", "the config file")
+var gatewayconfigFile = flag.String("gateway", "etc/gateway.yaml", "the config file")
 
 func main() {
 	flag.Parse()

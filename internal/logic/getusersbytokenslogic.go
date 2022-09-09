@@ -2,9 +2,10 @@ package logic
 
 import (
 	"context"
+	"go-im-user-server/internal/svc"
+
 	"github.com/heyehang/go-im-grpc/user_server"
 	"github.com/zeromicro/go-zero/core/logx"
-	"go-im-user-server/rpc/internal/svc"
 )
 
 type GetUsersByTokensLogic struct {

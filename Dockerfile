@@ -29,4 +29,4 @@ COPY --from=builder /app/user_server.pb /app/user_server.pb
 EXPOSE 9500
 EXPOSE 8082
 
-CMD ["./main", "-f", "etc/imserver.yaml",, "-gateway", "etc/gateway.yaml"]
+CMD ["./main", "-f", "etc/userserver.yaml", "-gateway", "etc/gateway.yaml"]

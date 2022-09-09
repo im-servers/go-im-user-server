@@ -7,8 +7,8 @@ import (
 	"context"
 
 	"github.com/heyehang/go-im-grpc/user_server"
-	"go-im-user-server/rpc/internal/logic"
-	"go-im-user-server/rpc/internal/svc"
+	"go-im-user-server/internal/logic"
+	"go-im-user-server/internal/svc"
 )
 
 type UserServer struct {

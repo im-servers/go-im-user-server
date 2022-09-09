@@ -1,4 +1,4 @@
-module go-im-user-server/rpc
+module go-im-user-server
 
 go 1.19
 
