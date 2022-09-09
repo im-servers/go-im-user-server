@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/heyehang/go-im-grpc v0.0.0-20220902120219-7c8710e4ae52
+	github.com/pyroscope-io/client v0.3.0
 	github.com/zeromicro/go-zero v1.4.0
 	google.golang.org/grpc v1.49.0
 )
@@ -33,7 +34,7 @@ require (
 	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/googleapis/gnostic v0.5.5 // indirect
-	github.com/heyehang/go-im-pkg v0.0.0-20220906082711-4b01a14ca8a8
+	github.com/heyehang/go-im-pkg v0.0.0-20220908134029-f2f5329e8e45
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
@@ -60,9 +61,9 @@ require (
 	go.uber.org/automaxprocs v1.5.1 // indirect
 	go.uber.org/multierr v1.8.0 // indirect
 	go.uber.org/zap v1.21.0 // indirect
-	golang.org/x/net v0.0.0-20220826154423-83b083e8dc8b // indirect
+	golang.org/x/net v0.0.0-20220907135653-1e95f45603a7 // indirect
 	golang.org/x/oauth2 v0.0.0-20220822191816-0ebed06d0094 // indirect
-	golang.org/x/sys v0.0.0-20220829200755-d48e67d00261 // indirect
+	golang.org/x/sys v0.0.0-20220907062415-87db552b00fd // indirect
 	golang.org/x/term v0.0.0-20220722155259-a9ba230a4035 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20220411224347-583f2d630306 // indirect
