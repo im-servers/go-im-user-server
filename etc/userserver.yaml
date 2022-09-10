@@ -4,17 +4,16 @@ Etcd:
   Hosts:
   - etcd.goimsrv.cn:2379
   Key: userserver.rpc
-  User: root   
-  Pass: im-server-256/?
+
 # mysql 配置
 Mysql:
-  DataSource: root:im-server-256/?@tcp(mysql.goimsrv.cn:3306)/go_im_server
+  DataSource: root:123456@tcp(localhost:3306)/go_im_server
   # 对应的表
   Table: user
+
 # redis 作为换存储
 CacheRedis:
   - Host: redis.goimsrv.cn:6379
-    Pass: im-server-256/?
 
 Log:
  Mode : volume
