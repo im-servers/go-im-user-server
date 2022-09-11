@@ -41,7 +41,7 @@ func (l *LoginLogic) Login(in *user_server.LoginReq) (*user_server.LoginReply, e
 	}
 
 	if in.Password != user.Password {
-		errors.New("user or password err")
+		err = errors.New("user or password err")
 		l.Logger.Error(err)
 		return &user_server.LoginReply{}, err
 	}
