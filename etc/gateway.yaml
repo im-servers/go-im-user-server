@@ -1,6 +1,6 @@
 Name: user-gateway
 Host: 0.0.0.0
-Port: 9500
+Port: 6200
 Upstreams:
   - Grpc:
       Etcd:
@@ -22,4 +22,4 @@ Upstreams:
         RpcPath: user_server.user/createUser
   - Grpc:
       Endpoints:
-        - 127.0.0.1:8082
+        - 127.0.0.1:9200
