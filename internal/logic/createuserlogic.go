@@ -88,7 +88,7 @@ func (l *CreateUserLogic) CreateUser(in *user_server.CreateUserReq) (*user_serve
 	_, err = l.store.SaddCtx(l.ctx, fmt.Sprintf("%s%v", cacheGoImServerUserTokenPrefix, id), token.AccessToken)
 
 	if err != nil {
-		err = errors.WithMessage(err, "set cache err")
+		err = errors.WithMessage(err, "SaddCtx err")
 		l.Logger.Error(err)
 		return &user_server.CreateUserReply{}, err
 	}
