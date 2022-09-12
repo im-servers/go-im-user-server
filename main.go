@@ -51,7 +51,6 @@ func main() {
 		defer gs.Stop()
 
 		fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
-		logx.Slowf("Starting rpc server at ...\n", logx.Field("addr", c.ListenOn))
 		gs.Start()
 	}()
 
@@ -73,25 +72,27 @@ func main() {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
+		startPyroscope(c)
 		defer func() {
 			if profile != nil {
 				_ = profile.Stop()
 			}
 		}()
-		startPyroscope()
 	}()
 
 	wg.Wait()
 }
 
-func startPyroscope() {
-	runtime.SetMutexProfileFraction(5)
-	runtime.SetBlockProfileRate(5)
+func startPyroscope(conf config.Config) {
+	// 互斥锁采样率
+	runtime.SetMutexProfileFraction(100)
+	// 阻塞采样率
+	runtime.SetBlockProfileRate(100)
 	var err error
 	profile, err = pyroscope.Start(pyroscope.Config{
-		ApplicationName: "go-im-user-server",
+		ApplicationName: conf.Name,
 		// replace this with the address of pyroscope server
-		ServerAddress: "http://172.16.0.15:4040",
+		ServerAddress: conf.PyroscopeAddr,
 		// you can disable logging by setting this to nil
 		Logger: pyroscope.StandardLogger,
 		// optionally, if authentication is enabled, specify the API key:

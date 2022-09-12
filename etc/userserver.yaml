@@ -1,5 +1,7 @@
 Name: userserver.rpc
 ListenOn: 0.0.0.0:9200
+PyroscopeAddr: 'http://127.0.0.1:4040'
+
 Etcd:
   Hosts:
   - etcd.goimsrv.cn:2379
