@@ -1,30 +1,30 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
-	"runtime"
 	"sync"
 	"time"
 
-	"go-im-user-server/internal/config"
-	"go-im-user-server/internal/server"
-	"go-im-user-server/internal/svc"
-
 	"github.com/heyehang/go-im-grpc/user_server"
 	"github.com/heyehang/go-im-pkg/tlog"
-	"github.com/pyroscope-io/client/pyroscope"
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/gateway"
 	"github.com/zeromicro/go-zero/zrpc"
+	"go-im-user-server/internal/config"
+	"go-im-user-server/internal/pyroscope"
+	"go-im-user-server/internal/server"
+	"go-im-user-server/internal/svc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
-var profile *pyroscope.Profiler
-var configFile = flag.String("f", "etc/userserver.yaml", "the config file")
-var gatewayconfigFile = flag.String("gateway", "etc/gateway.yaml", "the config file")
+var (
+	configFile        = flag.String("f", "etc/userserver.yaml", "the config file")
+	gatewayconfigFile = flag.String("gateway", "etc/gateway.yaml", "the config file")
+)
 
 func main() {
 	flag.Parse()
@@ -44,22 +44,17 @@ func main() {
 		reflection.Register(grpcServer)
 		//	}
 	})
-
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		defer gs.Stop()
-
 		fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
 		gs.Start()
 	}()
-
 	wg.Add(1)
-
 	var getewayConf gateway.GatewayConf
 	conf.MustLoad(*gatewayconfigFile, &getewayConf)
 	gw := gateway.MustNewServer(getewayConf)
-
 	go func() {
 		defer wg.Done()
 		defer gw.Stop()
@@ -68,53 +63,8 @@ func main() {
 		logx.Slowf("Starting rpc server at ...\n", logx.Field("addr", getewayConf.Host+fmt.Sprintf("%d", getewayConf.Prometheus.Port)))
 		gw.Start()
 	}()
-
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		startPyroscope(c)
-		defer func() {
-			if profile != nil {
-				_ = profile.Stop()
-			}
-		}()
-	}()
-
+	cancenCtx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+	pyroscope.Start(cancenCtx, wg, c.Name, c.PyroscopeAddr, nil, true)
 	wg.Wait()
-}
-
-func startPyroscope(conf config.Config) {
-	// 互斥锁采样率
-	runtime.SetMutexProfileFraction(100)
-	// 阻塞采样率
-	runtime.SetBlockProfileRate(100)
-	var err error
-	profile, err = pyroscope.Start(pyroscope.Config{
-		ApplicationName: conf.Name,
-		// replace this with the address of pyroscope server
-		ServerAddress: conf.PyroscopeAddr,
-		// you can disable logging by setting this to nil
-		Logger: pyroscope.StandardLogger,
-		// optionally, if authentication is enabled, specify the API key:
-		// AuthToken: os.Getenv("PYROSCOPE_AUTH_TOKEN"),
-		ProfileTypes: []pyroscope.ProfileType{
-			// these profile types are enabled by default:
-			pyroscope.ProfileCPU,
-			pyroscope.ProfileAllocObjects,
-			pyroscope.ProfileAllocSpace,
-			pyroscope.ProfileInuseObjects,
-			pyroscope.ProfileInuseSpace,
-			// these profile types are optional:
-			pyroscope.ProfileGoroutines,
-			pyroscope.ProfileMutexCount,
-			pyroscope.ProfileMutexDuration,
-			pyroscope.ProfileBlockCount,
-			pyroscope.ProfileBlockDuration,
-		},
-		SampleRate: 200,
-	})
-	if err != nil {
-		panic(err)
-		return
-	}
 }

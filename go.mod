@@ -34,7 +34,7 @@ require (
 	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/googleapis/gnostic v0.5.5 // indirect
-	github.com/heyehang/go-im-pkg v0.0.0-20220908134029-f2f5329e8e45
+	github.com/heyehang/go-im-pkg v0.0.0-20220911130855-8639602fc201
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect

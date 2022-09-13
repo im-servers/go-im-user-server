@@ -253,8 +253,8 @@ github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ
 github.com/hashicorp/golang-lru v0.5.1/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/heyehang/go-im-grpc v0.0.0-20220902120219-7c8710e4ae52 h1:a2xFSuQrgyfCOTrXzkNj9SaVCg6uQ60nQq6jyjMQNm0=
 github.com/heyehang/go-im-grpc v0.0.0-20220902120219-7c8710e4ae52/go.mod h1:smTsxWV3vlZ1TwXGtbf77+PbcptFLryYBzsgOpfJeGI=
-github.com/heyehang/go-im-pkg v0.0.0-20220908134029-f2f5329e8e45 h1:yEQqdInQVmK+vJfW8PJV2lfkWuwyaJ2JIxFlvKVa1Qc=
-github.com/heyehang/go-im-pkg v0.0.0-20220908134029-f2f5329e8e45/go.mod h1:1ecfN1CK7wbLfKfJ2eSBIL3ex0Cb6sZRY+yBEOKaJ2o=
+github.com/heyehang/go-im-pkg v0.0.0-20220911130855-8639602fc201 h1:lum/HYBGQMaXipev2IBLDGTaY0wcxcUb1XbJ4d3bl2k=
+github.com/heyehang/go-im-pkg v0.0.0-20220911130855-8639602fc201/go.mod h1:JA+dy07hEVVLliHg+2hUXzKqMm3C49DBhL3YKMaCFh4=
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=
 github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
 github.com/ianlancetaylor/demangle v0.0.0-20200824232613-28f6c0f3b639/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
