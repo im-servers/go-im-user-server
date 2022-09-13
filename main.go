@@ -69,5 +69,6 @@ func main() {
 	cancenCtx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	pyroscope.Start(cancenCtx, wg, c.Name, c.PyroscopeAddr, nil, true)
+	defer pyroscope.Closed()
 	wg.Wait()
 }
