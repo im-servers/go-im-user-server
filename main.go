@@ -37,12 +37,14 @@ func main() {
 	logx.SetWriter(writer)
 	ctx := svc.NewServiceContext(c)
 	wg := new(sync.WaitGroup)
+	waitGrpcStart := make(chan struct{}, 1)
 	gs := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		user_server.RegisterUserServer(grpcServer, server.NewUserServer(ctx))
 		//tttodo http auth
 		//	if c.Mode == service.DevMode || c.Mode == service.TestMode {
 		reflection.Register(grpcServer)
-		//	}
+		//	}x
+		waitGrpcStart <- struct{}{}
 	})
 	wg.Add(1)
 	go func() {
@@ -51,6 +53,7 @@ func main() {
 		fmt.Printf("Starting rpc server at %s...\n", c.ListenOn)
 		gs.Start()
 	}()
+	<-waitGrpcStart
 	wg.Add(1)
 	var getewayConf gateway.GatewayConf
 	conf.MustLoad(*gatewayconfigFile, &getewayConf)
